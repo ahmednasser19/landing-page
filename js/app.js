@@ -38,7 +38,14 @@ function navBarItem(id, name) {
 //declearation if viewPort  function
 function viewPortSection(elem) {
   let sectionBounding = elem.getBoundingClientRect();
-  return sectionBounding.top >= 0 && sectionBounding.left >= 0;
+  return (
+    sectionBounding.top >= 0 &&
+    sectionBounding.left >= 0 &&
+    sectionBounding.bottom <=
+      (window.innerHeight || document.documentElement.clientHeight) &&
+    sectionBounding.right <=
+      (window.innerWidth || document.documentElement.clientWidth)
+  );
 }
 /**
  * End Helper Functions
@@ -79,12 +86,12 @@ function setActiveClass() {
   for (let i = 0; i < scetionsList.length; i++) {
     //if the section is in veiw port
     if (viewPortSection(scetionsList[i])) {
-      if (!scetionsList[i].classList.contains("your-active-class")) {
+      if (scetionsList[i].classList.contains("your-active-class")) {
         //add your active class to the given view port
-        scetionsList[i].className = "your-active-class";
+        scetionsList[i].className = "";
       } else {
         // remove that given class
-        scetionsList[i].className = "";
+        scetionsList[i].className = "your-active-class";
       }
     }
   }
