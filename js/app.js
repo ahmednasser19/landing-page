@@ -21,7 +21,8 @@
 //create a document fregment for saving the new items of
 const createFragment = document.createDocumentFragment();
 //get all the sections i HTML page and save it in sections
-const scetions = Array.from(document.querySelectorAll("section"));
+
+const scetionsList = document.querySelectorAll("section");
 
 /**
  * End Global Variables
@@ -51,14 +52,14 @@ function viewPortSection(elem) {
 function navBarCreation() {
   //loop through the sections of our files
 
-  for (let i = 0; i < scetions.length; i++) {
+  for (let i = 0; i < scetionsList.length; i++) {
     // get the id and save it to the item id
-    const itemId = scetions[i].getAttribute("id");
+    const itemId = scetionsList[i].getAttribute("id");
     //create item for each one
     const newItem = document.createElement("li");
 
     //get item name from data-nav attribute
-    const itemName = scetions[i].getAttribute("data-nav");
+    const itemName = scetionsList[i].getAttribute("data-nav");
 
     newItem.innerHTML = navBarItem(itemId, itemName);
 
@@ -74,21 +75,23 @@ function navBarCreation() {
 navBarCreation();
 
 // Add class 'active' to section when near top of viewport
-function toggleActiveClass() {
-  for (let i = 0; i < scetions.length; i++) {
+function setActiveClass() {
+  for (let i = 0; i < scetionsList.length; i++) {
     //if the section is in veiw port
-    if (viewPortSection(scetions[i])) {
-      if (!scetions[i].classList.contains("your-active-class")) {
-        scetions[i].classList.add("your-active-class");
+    if (viewPortSection(scetionsList[i])) {
+      if (!scetionsList[i].classList.contains("your-active-class")) {
+        //add your active class to the given view port
+        scetionsList[i].className = "your-active-class";
       } else {
-        scetions[i].classList.remove("your-active-class");
+        // remove that given class
+        scetionsList[i].className = "";
       }
     }
   }
 }
 
 //add active class when top on scrilling
-document.addEventListener("scroll", toggleActiveClass);
+document.addEventListener("scroll", setActiveClass);
 // Scroll to anchor ID using scrollTO event
 
 /**
